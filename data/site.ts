@@ -26,7 +26,7 @@ export const hero = {
   eyebrow: 'AI SYSTEMS ENGINEERING · DATA · AUTOMATION · INTEGRATION',
   headline: 'AI infrastructure for complex business operations.',
   subheadline:
-    'We design and build AI systems that connect business data, workflows, knowledge and software—turning information into reliable, governed action.',
+    'We architect and build the AI, data, automation and integration infrastructure that connects business information to reliable, governed action.',
   supporting: 'Built to work beyond the demo.',
   primaryCta: { label: 'Discuss a System', href: '/contact' },
   secondaryCta: { label: 'View Our Work', href: '/work' },
@@ -310,8 +310,9 @@ export const caseStudies = [
 
 export const methodology = {
   eyebrow: 'HOW WE WORK',
-  heading: 'Business objective first. Architecture follows.',
-  closing: 'Identify process → build V1 → observe failures → improve the system.',
+  heading: 'From objective to operating system.',
+  closing:
+    'Architecture and implementation are treated as one continuous engineering problem.',
   stages: [
     { num: '01', name: 'Understand', desc: 'Define the business objective, operating process, constraints and judgment requirements.' },
     { num: '02', name: 'Map', desc: 'Identify information sources, systems of record, actors, decisions, integrations and failure boundaries.' },

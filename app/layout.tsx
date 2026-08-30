@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { Inter, Source_Serif_4, JetBrains_Mono } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { site } from '@/data/site';
+import { Navbar } from '@/components/site/navbar';
+import { Footer } from '@/components/site/footer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -96,7 +98,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans">
-        {children}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
