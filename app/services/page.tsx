@@ -6,10 +6,11 @@ import { Reveal } from '@/components/site/reveal';
 import { EngagementLadder } from '@/components/site/engagement-ladder';
 import { services, engagementModes } from '@/data/site';
 
+import { pageTitle, siteDescription } from '@/data/site';
+
 export const metadata: Metadata = {
-  title: 'AI Systems Engineering Services',
-  description:
-    'AI systems, data and knowledge infrastructure, automation and integration, and private/hybrid AI architecture.',
+  title: pageTitle('AI Systems Engineering Services'),
+  description: siteDescription,
   alternates: { canonical: '/services' },
 };
 

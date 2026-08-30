@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { contactForm } from '@/data/site';
+import { contactForm, siteIdentity } from '@/data/site';
+
+const contactEmail = siteIdentity.contactEmail;
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -18,20 +20,12 @@ export function ContactForm({
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formState, setFormState] = useState<Record<string, unknown>>({
-    engagement: defaultEngagement || '',
+    projectType: defaultEngagement || '',
   });
 
   const update = (key: string, value: unknown) => {
     setFormState((s) => ({ ...s, [key]: value }));
     setErrors((e) => ({ ...e, [key]: '' }));
-  };
-
-  const toggleMulti = (key: string, value: string) => {
-    const current = (formState[key] as string[]) || [];
-    const next = current.includes(value)
-      ? current.filter((v) => v !== value)
-      : [...current, value];
-    update(key, next);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,13 +37,15 @@ export function ContactForm({
       name: (formState.name as string) || '',
       email: (formState.email as string) || '',
       company: (formState.company as string) || '',
-      building: (formState.building as string) || '',
-      happening: (formState.happening as string[]) || [],
-      stage: (formState.stage as string) || '',
-      technology: (formState.technology as string) || '',
-      outcome: (formState.outcome as string) || '',
-      budget: (formState.budget as string) || '',
-      engagement: (formState.engagement as string) || '',
+      process: (formState.process as string) || '',
+      systems: (formState.systems as string) || '',
+      information: (formState.information as string) || '',
+      automatic: (formState.automatic as string) || '',
+      judgment: (formState.judgment as string) || '',
+      failing: (formState.failing as string) || '',
+      projectType: (formState.projectType as string) || '',
+      timeline: (formState.timeline as string) || '',
+      details: (formState.details as string) || '',
       website: (formState.website as string) || '',
     };
 
@@ -95,8 +91,8 @@ export function ContactForm({
           <span>
             Something went wrong submitting the brief. Please try again, or
             email directly at{' '}
-            <a href="mailto:aaronpqking@gmail.com" className="font-medium underline">
-              aaronpqking@gmail.com
+            <a href={`mailto:${contactEmail}`} className="font-medium underline">
+              {contactEmail}
             </a>
             .
           </span>
@@ -137,7 +133,7 @@ export function ContactForm({
         </Field>
       </div>
 
-      <Field label="Company" error={errors.company}>
+      <Field label="Company" hint="Optional" error={errors.company}>
         <input
           type="text"
           className={fieldBase}
@@ -146,76 +142,107 @@ export function ContactForm({
         />
       </Field>
 
-      <Field label="What are you building?" required error={errors.building}>
-        <SelectInput
-          options={contactForm.buildingOptions}
-          value={(formState.building as string) || ''}
-          onChange={(v) => update('building', v)}
-          placeholder="Select one"
-        />
-      </Field>
-
       <Field
-        label="What is happening?"
+        label="What business process are you trying to improve?"
         required
-        hint="Select all that apply"
-        error={errors.happening}
+        error={errors.process}
       >
-        <MultiChip
-          options={contactForm.happeningOptions}
-          selected={(formState.happening as string[]) || []}
-          onToggle={(v) => toggleMulti('happening', v)}
-        />
-      </Field>
-
-      <Field label="Current stage" required error={errors.stage}>
-        <SelectInput
-          options={contactForm.stageOptions}
-          value={(formState.stage as string) || ''}
-          onChange={(v) => update('stage', v)}
-          placeholder="Select stage"
-        />
-      </Field>
-
-      <Field label="Current technology" hint="Optional">
-        <input
-          type="text"
-          className={fieldBase}
-          value={(formState.technology as string) || ''}
-          onChange={(e) => update('technology', e.target.value)}
-          placeholder="e.g. OpenAI, FastAPI, PostgreSQL, LangChain"
-        />
-      </Field>
-
-      <Field label="What would a useful outcome look like?" required error={errors.outcome}>
         <textarea
-          className={cn(fieldBase, 'min-h-[120px] resize-y')}
-          value={(formState.outcome as string) || ''}
-          onChange={(e) => update('outcome', e.target.value)}
+          className={cn(fieldBase, 'min-h-[100px] resize-y')}
+          value={(formState.process as string) || ''}
+          onChange={(e) => update('process', e.target.value)}
           required
         />
       </Field>
 
+      <Field
+        label="What systems are involved?"
+        hint="Optional"
+        error={errors.systems}
+      >
+        <input
+          type="text"
+          className={fieldBase}
+          value={(formState.systems as string) || ''}
+          onChange={(e) => update('systems', e.target.value)}
+          placeholder="e.g. Salesforce, Gmail, internal tools, custom APIs"
+        />
+      </Field>
+
+      <Field
+        label="What information enters the process?"
+        hint="Optional"
+      >
+        <textarea
+          className={cn(fieldBase, 'min-h-[80px] resize-y')}
+          value={(formState.information as string) || ''}
+          onChange={(e) => update('information', e.target.value)}
+        />
+      </Field>
+
+      <Field
+        label="What should happen automatically?"
+        hint="Optional"
+      >
+        <textarea
+          className={cn(fieldBase, 'min-h-[80px] resize-y')}
+          value={(formState.automatic as string) || ''}
+          onChange={(e) => update('automatic', e.target.value)}
+        />
+      </Field>
+
+      <Field
+        label="Where is human judgment required?"
+        hint="Optional"
+      >
+        <textarea
+          className={cn(fieldBase, 'min-h-[80px] resize-y')}
+          value={(formState.judgment as string) || ''}
+          onChange={(e) => update('judgment', e.target.value)}
+        />
+      </Field>
+
+      <Field
+        label="What is currently failing or consuming time?"
+        hint="Optional"
+      >
+        <textarea
+          className={cn(fieldBase, 'min-h-[80px] resize-y')}
+          value={(formState.failing as string) || ''}
+          onChange={(e) => update('failing', e.target.value)}
+        />
+      </Field>
+
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Budget range" hint="Optional">
+        <Field label="Project type" required error={errors.projectType}>
           <SelectInput
-            options={contactForm.budgetOptions}
-            value={(formState.budget as string) || ''}
-            onChange={(v) => update('budget', v)}
-            placeholder="Select range"
-            allowEmpty
+            options={contactForm.projectTypeOptions}
+            value={(formState.projectType as string) || ''}
+            onChange={(v) => update('projectType', v)}
+            placeholder="Select type"
           />
         </Field>
-        <Field label="Preferred engagement" hint="Optional">
+        <Field label="Timeline" hint="Optional">
           <SelectInput
-            options={contactForm.engagementOptions}
-            value={(formState.engagement as string) || ''}
-            onChange={(v) => update('engagement', v)}
-            placeholder="Select type"
+            options={contactForm.timelineOptions}
+            value={(formState.timeline as string) || ''}
+            onChange={(v) => update('timeline', v)}
+            placeholder="Select timeline"
             allowEmpty
           />
         </Field>
       </div>
+
+      <Field
+        label="Additional project details"
+        hint="Optional"
+      >
+        <textarea
+          className={cn(fieldBase, 'min-h-[100px] resize-y')}
+          value={(formState.details as string) || ''}
+          onChange={(e) => update('details', e.target.value)}
+        />
+      </Field>
 
       <div className="flex flex-col gap-3 pt-2">
         <button
@@ -229,7 +256,7 @@ export function ContactForm({
               Submitting...
             </>
           ) : (
-            'Submit Project Brief'
+            'Send Project Brief'
           )}
         </button>
       </div>
@@ -300,38 +327,5 @@ function SelectInput({
         <option value="">— Clear selection —</option>
       )}
     </select>
-  );
-}
-
-function MultiChip({
-  options,
-  selected,
-  onToggle,
-}: {
-  options: string[];
-  selected: string[];
-  onToggle: (v: string) => void;
-}) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((opt) => {
-        const active = selected.includes(opt);
-        return (
-          <button
-            key={opt}
-            type="button"
-            onClick={() => onToggle(opt)}
-            className={cn(
-              'rounded-md border px-2.5 py-1.5 text-xs transition-colors',
-              active
-                ? 'border-accent bg-accent/10 text-accent'
-                : 'border-border bg-background text-muted-foreground hover:border-accent/40 hover:text-foreground'
-            )}
-          >
-            {opt}
-          </button>
-        );
-      })}
-    </div>
   );
 }

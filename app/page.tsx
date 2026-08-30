@@ -12,6 +12,7 @@ import { SystemsModelGraphic } from '@/components/site/systems-model-graphic';
 import { DemoFeatureCard } from '@/components/site/demo-feature-card';
 import {
   hero,
+  authorityBand,
   firmPositioning,
   services,
   systemsModel,
@@ -20,12 +21,13 @@ import {
   methodology,
   capabilities,
   finalCta,
+  pageTitle,
+  siteIdentity,
 } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: 'AI Systems Engineering · Data · Automation · Integration',
-  description:
-    'We architect and build the AI, data, automation and integration infrastructure that connects business information to reliable, governed action.',
+  title: pageTitle(),
+  description: siteIdentity.description,
   alternates: { canonical: '/' },
 };
 
@@ -82,6 +84,29 @@ export default function Home() {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* AUTHORITY BAND */}
+      <section className="border-b border-border bg-secondary/30 py-8">
+        <div className="container-page">
+          <Reveal>
+            <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 lg:flex-nowrap">
+                {authorityBand.labels.map((label) => (
+                  <span
+                    key={label}
+                    className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+              <p className="max-w-md text-center text-sm leading-relaxed text-muted-foreground lg:text-right">
+                {authorityBand.statement}
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 

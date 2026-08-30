@@ -4,10 +4,11 @@ import { ArrowUpRight } from 'lucide-react';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal } from '@/components/site/reveal';
 
+import { pageTitle, siteDescription } from '@/data/site';
+
 export const metadata: Metadata = {
-  title: 'Demonstrations',
-  description:
-    'Interactive demonstrations of AI systems engineering patterns. Explore how information flows through intelligence, decision, governance and action layers.',
+  title: pageTitle('Demonstrations'),
+  description: siteDescription,
   alternates: { canonical: '/demonstrations' },
 };
 

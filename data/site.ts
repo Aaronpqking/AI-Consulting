@@ -1,10 +1,16 @@
-export const site = {
-  name: 'Aaron King',
+// ─── Centralized Site Identity ───────────────────────────────────
+// All global components, metadata, and page titles read from this source.
+// To change the firm identity, update this object only.
+
+export const siteIdentity = {
+  companyName: 'Aaron King',
+  shortName: 'Aaron King',
+  legalName: 'Aaron King',
   tagline: 'AI Systems Engineering',
   positioning: 'Built to work beyond the demo.',
   description:
     'AI systems engineering for organizations that need to connect business data, workflows, knowledge and software into reliable, governed operating infrastructure.',
-  email: 'aaronpqking@gmail.com',
+  contactEmail: 'aaronpqking@gmail.com',
   location: 'South Florida · Remote',
   linkedin: 'https://linkedin.com/in/aaronpqking',
   github: 'https://github.com/Aaronpqking',
@@ -14,6 +20,18 @@ export const site = {
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://aaronking.dev',
 };
 
+// Backward-compatible alias — all existing imports use `site`
+export const site = siteIdentity;
+
+// ─── Metadata Helper ────────────────────────────────────────────
+// Centralized page-title pattern: [Page Name] | [Company Name]
+export function pageTitle(page?: string): string {
+  return page ? `${page} | ${siteIdentity.companyName}` : `${siteIdentity.companyName} | AI Systems Engineering, Automation & Data Infrastructure`;
+}
+
+export const siteDescription = siteIdentity.description;
+
+// ─── Navigation ──────────────────────────────────────────────────
 export const nav = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
@@ -22,6 +40,7 @@ export const nav = [
   { label: 'Contact', href: '/contact' },
 ];
 
+// ─── Homepage ────────────────────────────────────────────────────
 export const hero = {
   eyebrow: 'AI SYSTEMS ENGINEERING · DATA · AUTOMATION · INTEGRATION',
   headline: 'AI infrastructure for complex business operations.',
@@ -30,6 +49,17 @@ export const hero = {
   supporting: 'Built to work beyond the demo.',
   primaryCta: { label: 'Discuss a System', href: '/contact' },
   secondaryCta: { label: 'View Our Work', href: '/work' },
+};
+
+export const authorityBand = {
+  statement:
+    'Senior-led systems architecture and implementation across AI, data, operational systems and complex integrations.',
+  labels: [
+    'SYSTEMS ARCHITECTURE',
+    'AI & DATA INFRASTRUCTURE',
+    'ENTERPRISE INTEGRATION',
+    'PRODUCTION RELIABILITY',
+  ],
 };
 
 export const firmPositioning = {
@@ -41,6 +71,7 @@ export const firmPositioning = {
   supporting: 'Architecture and implementation are treated as one continuous engineering problem.',
 };
 
+// ─── Services ────────────────────────────────────────────────────
 export const services = [
   {
     id: 'ai-operating-systems',
@@ -125,6 +156,7 @@ export const services = [
   },
 ];
 
+// ─── Engagement Modes ────────────────────────────────────────────
 export const engagementModes = [
   {
     title: 'Architecture & Discovery',
@@ -152,6 +184,7 @@ export const engagementModes = [
   },
 ];
 
+// ─── Systems Model ───────────────────────────────────────────────
 export const systemsModel = {
   eyebrow: 'OUR SYSTEMS MODEL',
   heading: 'From information to governed action.',
@@ -197,6 +230,7 @@ export const systemsModel = {
   ],
 };
 
+// ─── Outcomes ────────────────────────────────────────────────────
 export const outcomes = [
   {
     title: 'Less information handling',
@@ -216,6 +250,7 @@ export const outcomes = [
   },
 ];
 
+// ─── Case Studies ────────────────────────────────────────────────
 export const caseStudies = [
   {
     id: 'industrial-knowledge-system',
@@ -234,7 +269,7 @@ export const caseStudies = [
       'production release discipline',
     ],
     href: '/work/industrial-knowledge-system',
-    cta: 'View Case Study',
+    cta: 'Read Case Study',
     problem:
       'Technical teams needed reliable answers from complex product documentation, but retrieval was inconsistent and ungrounded.',
     constraints:
@@ -263,7 +298,7 @@ export const caseStudies = [
       'access boundaries',
     ],
     href: '/work#private-hybrid-architecture',
-    cta: 'View Architecture',
+    cta: 'View Summary',
     problem:
       'Privacy-sensitive workflows needed AI capabilities without exposing internal data to external model providers.',
     constraints:
@@ -292,7 +327,7 @@ export const caseStudies = [
       'production debugging',
     ],
     href: '/work#transaction-integration-reliability',
-    cta: 'View Case Study',
+    cta: 'View Summary',
     problem:
       'Payment and transaction integrations were failing silently or producing inconsistent state across systems.',
     constraints:
@@ -308,6 +343,7 @@ export const caseStudies = [
   },
 ];
 
+// ─── Methodology ─────────────────────────────────────────────────
 export const methodology = {
   eyebrow: 'HOW WE WORK',
   heading: 'From objective to operating system.',
@@ -323,6 +359,7 @@ export const methodology = {
   ],
 };
 
+// ─── Capabilities ────────────────────────────────────────────────
 export const capabilities = [
   {
     title: 'AI & Reasoning',
@@ -342,6 +379,7 @@ export const capabilities = [
   },
 ];
 
+// ─── Final CTA ───────────────────────────────────────────────────
 export const finalCta = {
   eyebrow: 'START A CONVERSATION',
   headline: 'Have a business process that should work differently?',
@@ -350,13 +388,24 @@ export const finalCta = {
   secondary: { label: 'Send a Project Brief', href: '/contact' },
 };
 
+// ─── Firm Page ───────────────────────────────────────────────────
 export const firm = {
   whoWeAre: {
     heading: 'Who We Are',
     copy: 'We are an AI systems engineering and technology consulting practice. The work spans architecture, implementation, evaluation and operational readiness for organizations building AI capabilities into real business systems.',
   },
+  integratedApproach: {
+    heading: 'Integrated Approach',
+    copy: 'Operating infrastructure emerges at the intersection of three disciplines. None of them alone produces a system that works in production.',
+    pillars: [
+      { name: 'BUSINESS PROCESS', desc: 'Objectives, workflows, decisions, judgment and constraints.' },
+      { name: 'SYSTEMS ENGINEERING', desc: 'Architecture, integration, state, reliability and observability.' },
+      { name: 'AI & DATA', desc: 'Retrieval, reasoning, extraction, evaluation and governance.' },
+    ],
+    result: 'OPERATING INFRASTRUCTURE',
+  },
   whatWeBelieve: {
-    heading: 'What We Believe',
+    heading: 'Principles',
     items: [
       'AI should reason where reasoning adds value. Deterministic systems should execute where correctness is required.',
       'Architecture and implementation are one continuous engineering problem.',
@@ -377,9 +426,47 @@ export const firm = {
   },
   leadership: {
     heading: 'Leadership',
-    name: 'Aaron King',
-    role: 'AI Systems Architect & Delivery Consultant',
-    copy: 'AI systems and delivery professional combining hands-on applied AI engineering with more than 15 years of leadership, operations, implementation and stakeholder delivery. Experience spans applied AI architecture, RAG and retrieval systems, evaluation and governance, complex operational environments, production support and cross-functional delivery.',
+    profiles: [
+      {
+        name: 'Aaron King',
+        role: 'AI Systems Architect & Delivery Consultant',
+        copy: 'AI systems and delivery professional combining hands-on applied AI engineering with more than 15 years of leadership, operations, implementation and stakeholder delivery. Experience spans applied AI architecture, RAG and retrieval systems, evaluation and governance, complex operational environments, production support and cross-functional delivery.',
+      },
+    ],
+  },
+  experience: {
+    heading: 'Experience',
+    copy: 'Representative categories of hands-on experience — not client claims.',
+    categories: [
+      { name: 'Applied AI', desc: 'LLM integration, retrieval-augmented generation, agent systems, structured extraction and evaluation.' },
+      { name: 'Data & Knowledge Systems', desc: 'Document ingestion, hybrid retrieval, metadata architecture, provenance and corpus governance.' },
+      { name: 'Enterprise Integration', desc: 'CRM, commerce, email, calendar and internal system integration through APIs and workflows.' },
+      { name: 'CRM / Operational Systems', desc: 'Sales and operational workflows, relationship intelligence and process automation.' },
+      { name: 'Commerce', desc: 'Transaction systems, payment integration, state management and reliability engineering.' },
+      { name: 'Production Delivery', desc: 'Cross-functional delivery, stakeholder management, release discipline and operational support.' },
+      { name: 'Evaluation & Reliability', desc: 'Regression testing, evaluation frameworks, monitoring, failure observability and release gates.' },
+    ],
+  },
+  engagementModel: {
+    heading: 'Engagement Model',
+    items: [
+      { label: 'Senior-led', desc: 'Architecture and implementation led by experienced practitioners, not handed off to juniors.' },
+      { label: 'Architecture through implementation', desc: 'Design and build are treated as one continuous engineering problem.' },
+      { label: 'Production-oriented', desc: 'Systems are built for observable, reliable operation — not just demonstration.' },
+      { label: 'Iterative delivery', desc: 'Start with the smallest useful version connected to the real environment, then expand.' },
+      { label: 'Ongoing optimization', desc: 'Monitoring, evaluation and improvement continue after deployment.' },
+    ],
+  },
+  operatingContexts: {
+    heading: 'Where These Systems Apply',
+    copy: 'Representative operating contexts — not claims of specialized industry dominance.',
+    contexts: [
+      { name: 'Investment & Capital Operations', desc: 'Decision tracking, relationship intelligence, meeting-to-action workflows and research ingestion.' },
+      { name: 'Multi-Business Operations', desc: 'Cross-entity coordination, shared services and consolidated operational intelligence.' },
+      { name: 'Commerce & Revenue Operations', desc: 'Transaction reliability, CRM integration, revenue workflows and operational automation.' },
+      { name: 'Technical & Industrial Knowledge', desc: 'Complex document retrieval, structured data, provenance and corpus governance.' },
+      { name: 'Privacy-Sensitive Workflows', desc: 'Local and hybrid AI architectures with controlled data boundaries and disclosure.' },
+    ],
   },
   capability: {
     heading: 'Technical Capability',
@@ -387,57 +474,25 @@ export const firm = {
   },
 };
 
+// ─── Contact Form ────────────────────────────────────────────────
 export const contactForm = {
-  heading: 'Tell us about the system.',
+  heading: 'Send a project brief.',
   subheading:
-    'You do not need to know the solution. A concise description of the business process, current systems and desired outcome is enough to start.',
-  buildingOptions: [
-    'AI operating system / workflow',
-    'RAG / knowledge system',
-    'AI agent',
-    'Automation / integration',
-    'AI feature inside an existing product',
-    'Evaluation / QA system',
-    'Model integration',
-    'Private / hybrid AI architecture',
-    'Other',
-  ],
-  happeningOptions: [
-    'Need architecture',
-    'Need implementation',
-    'System stalled',
-    'Integration failure',
-    'Poor retrieval quality',
-    'Inconsistent outputs',
-    'No evaluation framework',
-    'Production-readiness concerns',
-    'Need ongoing systems support',
-    'Other',
-  ],
-  stageOptions: [
-    'Idea / discovery',
-    'Prototype',
-    'Internal beta',
-    'Pre-production',
-    'Production',
-    'Production with active problems',
-  ],
-  budgetOptions: [
-    'Under $1,000',
-    '$1,000–$2,500',
-    '$2,500–$5,000',
-    '$5,000–$10,000',
-    '$10,000+',
-    'Not sure yet',
-  ],
-  engagementOptions: [
+    'Bring the objective, the process and the constraints. A concise description of the business process, current systems and desired outcome is enough to start a qualified architecture conversation.',
+  projectTypeOptions: [
     'Architecture & Discovery',
     'Implementation',
     'Systems Rescue',
-    'Evaluation & Readiness',
+    'Evaluation',
     'Fractional Architecture',
-    'Not sure',
+    'Ongoing Support',
+  ],
+  timelineOptions: [
+    'Immediate',
+    '1–2 months',
+    '3–6 months',
+    'Exploratory',
   ],
   successMessage:
-    "Received. We'll review the project brief and respond with the most appropriate next step.",
+    "Project brief received. We'll review it and respond with the most appropriate next step.",
 };

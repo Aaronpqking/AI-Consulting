@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next';
-import { site } from '@/data/site';
+import { siteIdentity } from '@/data/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = site.siteUrl;
+  const base = siteIdentity.siteUrl;
   const pages = ['', '/services', '/work', '/firm', '/contact', '/demonstrations'];
 
   return pages.map((path) => ({

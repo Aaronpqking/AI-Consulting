@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Linkedin, Github, ArrowRight } from 'lucide-react';
-import { nav, site } from '@/data/site';
+import { nav, siteIdentity } from '@/data/site';
 
 export function Footer() {
   return (
@@ -13,14 +13,14 @@ export function Footer() {
                 <span className="font-serif text-sm font-bold text-accent-foreground">A</span>
               </span>
               <span className="font-serif text-[17px] font-semibold tracking-tight">
-                {site.name}
+                {siteIdentity.companyName}
               </span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/60">
-              {site.footerLine}
+              {siteIdentity.footerLine}
             </p>
             <p className="mt-3 text-sm text-primary-foreground/40">
-              {site.location}
+              {siteIdentity.location}
             </p>
           </div>
 
@@ -50,15 +50,15 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               <li>
                 <a
-                  href={`mailto:${site.email}`}
+                  href={`mailto:${siteIdentity.contactEmail}`}
                   className="text-sm text-primary-foreground/70 transition-colors hover:text-accent"
                 >
-                  {site.email}
+                  {siteIdentity.contactEmail}
                 </a>
               </li>
               <li>
                 <a
-                  href={site.linkedin}
+                  href={siteIdentity.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 text-sm text-primary-foreground/70 transition-colors hover:text-accent"
@@ -69,7 +69,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={site.github}
+                  href={siteIdentity.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 text-sm text-primary-foreground/70 transition-colors hover:text-accent"
@@ -84,7 +84,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-primary-foreground/10 pt-6 sm:flex-row sm:items-center">
           <p className="text-xs text-primary-foreground/40">
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} {siteIdentity.companyName}. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="text-xs text-primary-foreground/40 hover:text-accent">

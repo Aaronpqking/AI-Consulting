@@ -4,10 +4,11 @@ import { Reveal } from '@/components/site/reveal';
 import { Cta } from '@/components/site/cta';
 import { caseStudies, finalCta } from '@/data/site';
 
+import { pageTitle, siteDescription } from '@/data/site';
+
 export const metadata: Metadata = {
-  title: 'Selected AI Systems Work',
-  description:
-    'Selected AI systems work: industrial knowledge and retrieval systems, private/hybrid intelligence architecture, and transaction integration reliability.',
+  title: pageTitle('Selected Systems Engineering Work'),
+  description: siteDescription,
   alternates: { canonical: '/work' },
 };
 
@@ -19,13 +20,11 @@ export default function WorkPage() {
           <SectionHeading
             eyebrow="SELECTED WORK"
             heading="Selected systems work"
-            intro="Each case is structured around the problem, constraints, system, method, decision and result. No fabricated metrics."
+            intro="Each case is structured around the problem, constraints, system, method, decision and result."
           />
           <Reveal>
             <p className="mt-4 max-w-2xl text-xs uppercase tracking-[0.14em] text-muted-foreground/70">
-              Selected work is summarized at a high level to protect internal
-              and client information. No client names, invented metrics, or
-              fabricated results are used.
+              Selected engagements are anonymized to protect client and proprietary information.
             </p>
           </Reveal>
 

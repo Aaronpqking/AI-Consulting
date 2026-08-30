@@ -9,12 +9,19 @@ import { ReviewQueue } from '@/components/site/demo/review-queue';
 import { MeetingDetails } from '@/components/site/demo/meeting-details';
 import { AuditTrail } from '@/components/site/demo/audit-trail';
 import { ArchitectureDiagram } from '@/components/site/demo/architecture-diagram';
+import { EntityResolution } from '@/components/site/demo/entity-resolution';
+import { CrmProposals } from '@/components/site/demo/crm-proposals';
+import { FollowUpDraft } from '@/components/site/demo/follow-up-draft';
+import { KnowledgeUpdates } from '@/components/site/demo/knowledge-updates';
+import { ExecutiveJudgment } from '@/components/site/demo/executive-judgment';
+import { DownstreamSummary } from '@/components/site/demo/downstream-summary';
+import { PeopleCompanies } from '@/components/site/demo/people-companies';
 import { meetingFixture } from '@/data/meeting-fixture';
+import { pageTitle, siteDescription } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: 'Meeting Intelligence System — Demo',
-  description:
-    'Interactive demonstration of meeting transcript processing through normalization, extraction, classification, human review and action routing.',
+  title: pageTitle('Meeting Intelligence Demo'),
+  description: siteDescription,
   alternates: { canonical: '/demonstrations/meeting-intelligence' },
 };
 
@@ -30,7 +37,7 @@ export default function MeetingIntelligenceDemoPage({
   const meeting = meetingFixture;
 
   return (
-    <div className="pt-24 sm:pt-28">
+    <div className="pt-[68px]">
       {/* INTRO */}
       <section className="section-pad">
         <div className="container-page">
@@ -73,13 +80,41 @@ export default function MeetingIntelligenceDemoPage({
         </div>
       </section>
 
+      {/* PEOPLE & COMPANIES */}
+      <section className="section-pad bg-secondary/20">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 02–03"
+            heading="People and companies"
+            intro="The system identifies people and companies mentioned in the meeting, linking them to CRM records where possible."
+          />
+          <div className="mt-10">
+            <PeopleCompanies meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
+      {/* ENTITY RESOLUTION */}
+      <section className="section-pad">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 03"
+            heading="Entity resolution"
+            intro="Mentions of people and companies are matched against CRM records. High-confidence matches are auto-resolved. Ambiguous matches require human review."
+          />
+          <div className="mt-10">
+            <EntityResolution meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
       {/* REVIEW QUEUE */}
       <section className="section-pad bg-secondary/20">
         <div className="container-page">
           <SectionHeading
             eyebrow="STEP 03–05"
             heading="Human review queue"
-            intro="Extracted action items are presented for human approval before routing. Each item includes source attribution and a confidence score. Try approving and rejecting items to see how the system responds."
+            intro="Extracted action items are presented for human approval before routing. Each item includes source attribution and a confidence score. Try approving, editing, rejecting and deferring items to see how the system responds."
           />
           <div className="mt-10">
             <ReviewQueue items={meeting.actionItems} />
@@ -101,8 +136,78 @@ export default function MeetingIntelligenceDemoPage({
         </div>
       </section>
 
-      {/* AUDIT TRAIL */}
+      {/* CRM PROPOSALS */}
       <section className="section-pad bg-secondary/20">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 04–05"
+            heading="Proposed CRM updates"
+            intro="Based on the meeting, the system proposes updates to CRM records. Each proposal includes source evidence and confidence. No CRM system is connected — these are proposed changes for review."
+          />
+          <div className="mt-10">
+            <CrmProposals meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
+      {/* FOLLOW-UP DRAFT */}
+      <section className="section-pad">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 05"
+            heading="Follow-up communication draft"
+            intro="The system drafts a follow-up email derived from meeting commitments. The draft is reviewed before sending. No email is actually sent."
+          />
+          <div className="mt-10">
+            <FollowUpDraft meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
+      {/* KNOWLEDGE UPDATES */}
+      <section className="section-pad bg-secondary/20">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 05"
+            heading="Knowledge updates"
+            intro="Structured institutional-memory capture. The system proposes what should be stored and why — decision records, commitment records, relationship notes and meeting summaries."
+          />
+          <div className="mt-10">
+            <KnowledgeUpdates meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
+      {/* EXECUTIVE JUDGMENT */}
+      <section className="section-pad">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 04–05"
+            heading="Executive judgment items"
+            intro="Items that require human judgment — ambiguous references, scope trade-offs, budget decisions — are surfaced for executive review rather than automated."
+          />
+          <div className="mt-10">
+            <ExecutiveJudgment meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
+      {/* DOWNSTREAM SUMMARY */}
+      <section className="section-pad bg-secondary/20">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="STEP 06"
+            heading="Downstream action summary"
+            intro="After review, the system produces a summary of organizational state changes across CRM, tasks, communication, knowledge, executive review and audit."
+          />
+          <div className="mt-10">
+            <DownstreamSummary meeting={meeting} />
+          </div>
+        </div>
+      </section>
+
+      {/* AUDIT TRAIL */}
+      <section className="section-pad">
         <div className="container-page">
           <SectionHeading
             eyebrow="GOVERNANCE"
@@ -116,7 +221,7 @@ export default function MeetingIntelligenceDemoPage({
       </section>
 
       {/* ARCHITECTURE */}
-      <section className="section-pad">
+      <section className="section-pad bg-secondary/20">
         <div className="container-page">
           <SectionHeading
             eyebrow="ARCHITECTURE"

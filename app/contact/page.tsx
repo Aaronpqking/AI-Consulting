@@ -3,13 +3,12 @@ import { SectionHeading } from '@/components/site/section-heading';
 import { Reveal } from '@/components/site/reveal';
 import { Cta } from '@/components/site/cta';
 import { ContactForm } from '@/components/site/contact-form';
-import { contactForm, site } from '@/data/site';
+import { contactForm, siteIdentity, pageTitle, siteDescription } from '@/data/site';
 import { Mail, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description:
-    'Submit a project brief. A concise description of the business process, current systems and desired outcome is enough to start.',
+  title: pageTitle('Contact'),
+  description: siteDescription,
   alternates: { canonical: '/contact' },
 };
 
@@ -38,11 +37,11 @@ export default function ContactPage({
                       Direct email
                     </h3>
                     <a
-                      href={`mailto:${site.email}`}
+                      href={`mailto:${siteIdentity.contactEmail}`}
                       className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent"
                     >
                       <Mail className="h-4 w-4" />
-                      {site.email}
+                      {siteIdentity.contactEmail}
                     </a>
                   </div>
                   <div className="border-t border-border pt-4">
@@ -51,7 +50,7 @@ export default function ContactPage({
                     </h3>
                     <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
                       <MapPin className="h-4 w-4" />
-                      {site.location}
+                      {siteIdentity.location}
                     </div>
                   </div>
                   <div className="border-t border-border pt-4">

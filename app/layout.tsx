@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Source_Serif_4, JetBrains_Mono } from 'next/font/google';
 import { cn } from '@/lib/utils';
-import { site } from '@/data/site';
+import { siteIdentity, siteDescription, pageTitle } from '@/data/site';
 import { Navbar } from '@/components/site/navbar';
 import { Footer } from '@/components/site/footer';
 
@@ -25,32 +25,29 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-const siteUrl = site.siteUrl;
+const siteUrl = siteIdentity.siteUrl;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} | AI Systems Engineering, Automation & Data Infrastructure`,
-    template: `%s | ${site.name}`,
+    default: pageTitle(),
+    template: `%s | ${siteIdentity.companyName}`,
   },
-  description:
-    'AI systems engineering for organizations that need to connect business data, workflows, knowledge and software into reliable, governed operating infrastructure.',
-  authors: [{ name: site.name }],
-  creator: site.name,
+  description: siteDescription,
+  authors: [{ name: siteIdentity.companyName }],
+  creator: siteIdentity.companyName,
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: site.name,
-    title: `${site.name} | AI Systems Engineering, Automation & Data Infrastructure`,
-    description:
-      'AI systems engineering for organizations that need to connect business data, workflows, knowledge and software into reliable, governed operating infrastructure.',
+    siteName: siteIdentity.companyName,
+    title: pageTitle(),
+    description: siteDescription,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${site.name} | AI Systems Engineering`,
-    description:
-      'AI systems engineering for organizations that need to connect business data, workflows, knowledge and software into reliable, governed operating infrastructure.',
+    title: `${siteIdentity.companyName} | AI Systems Engineering`,
+    description: siteDescription,
   },
   robots: {
     index: true,
@@ -75,9 +72,8 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: site.name,
-    description:
-      'AI systems engineering for organizations that need to connect business data, workflows, knowledge and software into reliable, governed operating infrastructure.',
+    name: siteIdentity.companyName,
+    description: siteDescription,
     url: siteUrl,
     areaServed: 'Worldwide (remote)',
     knowsAbout: [

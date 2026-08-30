@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { nav, site } from '@/data/site';
+import { nav, siteIdentity } from '@/data/site';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -43,13 +43,13 @@ export function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-3"
-          aria-label={`${site.name} — home`}
+          aria-label={`${siteIdentity.companyName} — home`}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-primary">
             <span className="font-serif text-sm font-bold text-primary-foreground">A</span>
           </span>
           <span className="font-serif text-[17px] font-semibold tracking-tight text-foreground">
-            {site.name}
+            {siteIdentity.companyName}
           </span>
         </Link>
 

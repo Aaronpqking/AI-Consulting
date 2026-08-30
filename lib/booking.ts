@@ -12,8 +12,8 @@ export function bookingHref(engagement?: string): string {
   return qs ? `/contact?${qs}` : '/contact';
 }
 
+import { siteIdentity } from '@/data/site';
+
 export function siteUrl(): string {
-  return (
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://aaronking.dev'
-  );
+  return siteIdentity.siteUrl;
 }
