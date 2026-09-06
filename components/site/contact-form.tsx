@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { contactForm, siteIdentity } from '@/data/site';
@@ -12,6 +12,22 @@ type Status = 'idle' | 'submitting' | 'success' | 'error';
 const fieldBase =
   'w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
+function getAttribution() {
+  if (typeof window === 'undefined') return {};
+  const params = new URLSearchParams(window.location.search);
+  return {
+    ctaSource: params.get('source') || '',
+    utmSource: params.get('utm_source') || '',
+    utmMedium: params.get('utm_medium') || '',
+    utmCampaign: params.get('utm_campaign') || '',
+    utmContent: params.get('utm_content') || '',
+    utmTerm: params.get('utm_term') || '',
+    referrer: document.referrer || '',
+    landingPage: sessionStorage.getItem('landing_page') || '',
+    formPage: window.location.pathname,
+  };
+}
+
 export function ContactForm({
   defaultEngagement,
 }: {
@@ -19,9 +35,16 @@ export function ContactForm({
 }) {
   const [status, setStatus] = useState<Status>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [acknowledgmentNote, setAcknowledgmentNote] = useState(true);
   const [formState, setFormState] = useState<Record<string, unknown>>({
     projectType: defaultEngagement || '',
   });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('landing_page')) {
+      sessionStorage.setItem('landing_page', window.location.href);
+    }
+  }, []);
 
   const update = (key: string, value: unknown) => {
     setFormState((s) => ({ ...s, [key]: value }));
@@ -32,6 +55,8 @@ export function ContactForm({
     e.preventDefault();
     setStatus('submitting');
     setErrors({});
+
+    const attribution = getAttribution();
 
     const payload = {
       name: (formState.name as string) || '',
@@ -47,6 +72,7 @@ export function ContactForm({
       timeline: (formState.timeline as string) || '',
       details: (formState.details as string) || '',
       website: (formState.website as string) || '',
+      ...attribution,
     };
 
     try {
@@ -65,7 +91,16 @@ export function ContactForm({
         }
         return;
       }
+      setAcknowledgmentNote(data.acknowledgmentSent !== false);
       setStatus('success');
+      // Fire analytics event after durable capture
+      if (typeof window !== 'undefined' && 'gtag' in window) {
+        const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
+        gtag('event', 'contact_submit_success', {
+          cta_source: attribution.ctaSource || 'direct',
+          page: attribution.formPage,
+        });
+      }
     } catch {
       setStatus('error');
     }
@@ -77,8 +112,14 @@ export function ContactForm({
         <CheckCircle2 className="mx-auto h-10 w-10 text-accent" />
         <h3 className="mt-4 font-serif text-xl font-semibold">Project brief received</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          {contactForm.successMessage}
+          Your brief has been received. We&apos;ll review the objective, systems and
+          constraints you shared and follow up with the appropriate next step.
         </p>
+        {acknowledgmentNote && (
+          <p className="mt-3 text-xs text-muted-foreground/70">
+            A confirmation email has been sent to your address.
+          </p>
+        )}
       </div>
     );
   }
