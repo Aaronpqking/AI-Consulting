@@ -12,13 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact' },
 };
 
-export default function ContactPage({
-  searchParams,
-}: {
-  searchParams: { engagement?: string };
-}) {
-  const engagement = searchParams.engagement;
-
+export default function ContactPage() {
   return (
     <div className="pt-24 sm:pt-28">
       <section className="section-pad">
@@ -69,7 +63,7 @@ export default function ContactPage({
             <div className="lg:col-span-7">
               <Reveal delay={100}>
                 <div className="rounded-lg border border-border bg-card/50 p-6 sm:p-8">
-                  <ContactForm defaultEngagement={engagement} />
+                  <ContactForm />
                 </div>
               </Reveal>
             </div>

@@ -1,13 +1,39 @@
 import { NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { contactSchema } from '@/lib/contact';
-import { getSupabaseServerClient } from '@/lib/supabase-server';
 import {
   sendInternalNotification,
   sendProspectAcknowledgment,
   isEmailConfigured,
-  type LeadRecord,
+  type InquiryRecord,
 } from '@/lib/email';
+
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 5;
+const rateMap = new Map<string, { count: number; resetAt: number }>();
+
+function getRateLimitKey(request: Request): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+  return ip;
+}
+
+function checkRateLimit(key: string): boolean {
+  const now = Date.now();
+  const entry = rateMap.get(key);
+
+  if (!entry || now > entry.resetAt) {
+    rateMap.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+
+  entry.count++;
+  return true;
+}
 
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
@@ -18,7 +44,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  // Honeypot check — silently reject if populated
+  // Rate limiting
+  const rlKey = getRateLimitKey(request);
+  if (!checkRateLimit(rlKey)) {
+    return NextResponse.json(
+      { error: 'Too many submissions. Please try again in a minute.' },
+      { status: 429 }
+    );
+  }
+
+  // Honeypot check — silently accept without doing anything
   if (body.website) {
     return NextResponse.json({ ok: true }, { status: 200 });
   }
@@ -37,25 +72,33 @@ export async function POST(request: Request) {
 
   const data = result.data;
 
-  // Generate server-side submission ID and timestamp
-  const submissionId = randomUUID();
+  // Use client-provided submission ID or generate one
+  const submissionId = data.submissionId || randomUUID();
   const timestamp = new Date().toISOString();
 
-  // Build the lead record
-  const lead = {
+  // Check email configuration
+  if (!isEmailConfigured()) {
+    console.error('[contact] Email not configured', { submissionId });
+    return NextResponse.json(
+      {
+        error:
+          'We could not send your submission at this time. Please email us directly at ' +
+          (process.env.CONTACT_TO_EMAIL || 'our contact address') +
+          '.',
+      },
+      { status: 503 }
+    );
+  }
+
+  // Build the inquiry record
+  const inquiry: InquiryRecord = {
     submission_id: submissionId,
     name: data.name,
     email: data.email,
     company: data.company || null,
-    project_summary: data.process,
-    systems_involved: data.systems || null,
-    information: data.information || null,
-    automatic: data.automatic || null,
-    judgment: data.judgment || null,
-    failing: data.failing || null,
-    project_type: data.projectType,
+    summary: data.summary,
+    systems: data.systems || null,
     timeline: data.timeline || null,
-    details: data.details || null,
     landing_page: data.landingPage || null,
     form_page: data.formPage || '/contact',
     cta_source: data.ctaSource || null,
@@ -65,144 +108,44 @@ export async function POST(request: Request) {
     utm_campaign: data.utmCampaign || null,
     utm_content: data.utmContent || null,
     utm_term: data.utmTerm || null,
-    notification_status: 'pending' as const,
-    acknowledgment_status: 'pending' as const,
-    status: 'new' as const,
-    user_agent: request.headers.get('user-agent') || null,
   };
 
-  // STEP 1: Durable insert into Supabase — must succeed before anything else
-  let supabase;
-  try {
-    supabase = getSupabaseServerClient();
-  } catch {
-    return NextResponse.json(
-      { error: 'Service temporarily unavailable. Please email us directly.' },
-      { status: 503 }
-    );
-  }
+  // STEP 1: Send internal notification — this is the acceptance boundary
+  const internalResult = await sendInternalNotification(inquiry);
 
-  let insertError: { code?: string; message?: string } | null = null;
-
-  try {
-    const { error } = await supabase.from('leads').insert(lead);
-    insertError = error;
-  } catch (e) {
-    insertError = { message: e instanceof Error ? e.message : 'Unknown error' };
-  }
-
-  if (insertError) {
-    // Check for duplicate submission_id (idempotency)
-    if (insertError.code === '23505') {
-      return NextResponse.json(
-        { ok: true, message: 'This submission was already received.' },
-        { status: 200 }
-      );
-    }
-
-    console.error('[contact] Supabase insert failed:', {
+  if (!internalResult.success) {
+    console.error('[contact] Internal notification failed:', {
       submissionId,
-      code: insertError.code,
-      message: insertError.message,
+      error: internalResult.error,
     });
-
     return NextResponse.json(
       {
         error:
-          'We could not save your submission at this time. Please email us directly at ' +
+          'We could not send your project brief. Please email us directly at ' +
           (process.env.CONTACT_TO_EMAIL || 'our contact address') +
           '.',
       },
-      { status: 503 }
+      { status: 502 }
     );
   }
 
-  // Lead is durably stored. Now attempt email delivery.
-  const emailLead: LeadRecord = {
-    submission_id: submissionId,
-    name: data.name,
-    email: data.email,
-    company: data.company || null,
-    project_summary: data.process,
-    systems_involved: data.systems || null,
-    project_type: data.projectType,
-    timeline: data.timeline || null,
-    details: data.details || null,
-    landing_page: data.landingPage || null,
-    cta_source: data.ctaSource || null,
-    referrer: data.referrer || null,
-    utm_source: data.utmSource || null,
-    utm_medium: data.utmMedium || null,
-    utm_campaign: data.utmCampaign || null,
-    utm_content: data.utmContent || null,
-    utm_term: data.utmTerm || null,
-  };
+  // Internal notification accepted — the inquiry is received.
+  // STEP 2: Attempt prospect acknowledgment
+  let acknowledgmentSent = false;
 
-  let notificationStatus = 'pending';
-  let notificationSentAt: string | null = null;
-  let notificationError: string | null = null;
+  const ackResult = await sendProspectAcknowledgment(inquiry);
 
-  let acknowledgmentStatus = 'pending';
-  let acknowledgmentSentAt: string | null = null;
-  let acknowledgmentError: string | null = null;
-
-  if (!isEmailConfigured()) {
-    notificationStatus = 'failed';
-    notificationError = 'Email provider not configured';
-    acknowledgmentStatus = 'failed';
-    acknowledgmentError = 'Email provider not configured';
+  if (ackResult.success) {
+    acknowledgmentSent = true;
   } else {
-    // STEP 2: Internal notification email
-    try {
-      await sendInternalNotification(emailLead);
-      notificationStatus = 'sent';
-      notificationSentAt = new Date().toISOString();
-    } catch (e) {
-      notificationStatus = 'failed';
-      notificationError = e instanceof Error ? e.message : 'Unknown error';
-      console.error('[contact] Internal notification failed:', {
-        submissionId,
-        error: notificationError,
-      });
-    }
-
-    // STEP 3: Prospect acknowledgment email
-    try {
-      await sendProspectAcknowledgment(emailLead);
-      acknowledgmentStatus = 'sent';
-      acknowledgmentSentAt = new Date().toISOString();
-    } catch (e) {
-      acknowledgmentStatus = 'failed';
-      acknowledgmentError = e instanceof Error ? e.message : 'Unknown error';
-      console.error('[contact] Prospect acknowledgment failed:', {
-        submissionId,
-        error: acknowledgmentError,
-      });
-    }
-  }
-
-  // STEP 4: Update delivery status fields in Supabase
-  try {
-    await supabase
-      .from('leads')
-      .update({
-        notification_status: notificationStatus,
-        notification_sent_at: notificationSentAt,
-        acknowledgment_status: acknowledgmentStatus,
-        acknowledgment_sent_at: acknowledgmentSentAt,
-        last_notification_error: notificationError,
-      })
-      .eq('submission_id', submissionId);
-  } catch (e) {
-    console.error('[contact] Failed to update delivery status:', {
+    console.error('[contact] Prospect acknowledgment failed:', {
       submissionId,
-      error: e instanceof Error ? e.message : 'Unknown error',
+      error: ackResult.error,
     });
+    // Lead is still received — do not fail
   }
 
-  // STEP 5: Return truthful status
-  const acknowledgmentSent = acknowledgmentStatus === 'sent';
-
+  // STEP 3: Return truthful status
   return NextResponse.json({
     ok: true,
     submissionId,
