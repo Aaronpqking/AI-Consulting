@@ -9,10 +9,10 @@ import { ServiceCard } from '@/components/site/service-card';
 import { CaseCard } from '@/components/site/case-card';
 import { CapabilityBlock } from '@/components/site/capability-block';
 import { SystemsModelGraphic } from '@/components/site/systems-model-graphic';
-import { DemoFeatureCard } from '@/components/site/demo-feature-card';
 import {
   hero,
   authorityBand,
+  forwardDeployment,
   firmPositioning,
   services,
   systemsModel,
@@ -110,6 +110,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FORWARD DEPLOYMENT */}
+      <section className="section-pad">
+        <div className="container-page">
+          <div className="mx-auto max-w-4xl">
+            <Reveal>
+              <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                {forwardDeployment.eyebrow}
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <h2 className="text-balance font-serif text-3xl font-semibold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+                {forwardDeployment.heading}
+              </h2>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+                {forwardDeployment.copy}
+              </p>
+            </Reveal>
+            <Reveal delay={240}>
+              <div className="mt-12 flex flex-wrap gap-x-4 gap-y-3">
+                {forwardDeployment.stages.map((stage, i) => (
+                  <div key={stage.name} className="flex items-center gap-3">
+                    {i > 0 && <span className="text-accent/40">→</span>}
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
+                        {stage.name}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* 1. FROM BUSINESS PROCESS TO WORKING SYSTEM */}
       <section className="section-pad">
         <div className="container-page">
@@ -142,9 +179,9 @@ export default function Home() {
       <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <SectionHeading
-            eyebrow="PRACTICES"
+            eyebrow="CAPABILITIES"
             heading="What we build"
-            intro="Four practices that connect information, intelligence, decisions and action across business systems."
+            intro="Four capability areas that connect information, intelligence, decisions and action across business systems."
           />
           <div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
             {services.map((s, i) => (
@@ -209,7 +246,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="SELECTED WORK"
             heading="Selected systems work"
-            intro="Each engagement is structured around the problem, constraints, system, method, decision and result."
+            intro="Each engagement is structured around the problem, constraints, system, engineering, outcome and evidence."
           />
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {caseStudies.slice(0, 3).map((study, i) => (
@@ -219,26 +256,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. DEMONSTRATIONS */}
-      <section className="section-pad bg-secondary/40">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="DEMONSTRATIONS"
-            heading="See the architecture operate."
-            intro="Interactive demonstrations that show how AI systems engineering connects information to governed action."
-          />
-          <div className="mt-14">
-            <DemoFeatureCard
-              title="Meeting Intelligence"
-              description="A meeting becomes structured decisions, commitments, tasks, relationship updates, follow-up drafts and review items while preserving source evidence and human approval."
-              cta="Run the Demonstration"
-              href="/demonstrations/meeting-intelligence"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 7. HOW WE WORK */}
+      {/* 6. HOW WE WORK */}
       <section className="section-pad">
         <div className="container-page">
           <SectionHeading
@@ -276,13 +294,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. TECHNICAL CAPABILITY */}
+      {/* 7. TECHNICAL CAPABILITY */}
       <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <SectionHeading
             eyebrow="CAPABILITY"
             heading="Technical surface area"
-            intro="Concise and subordinate to the business proposition. Each cluster represents hands-on applied engineering work."
+            intro="Applied capabilities used to build, integrate and operate production systems."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((cap, i) => (
@@ -297,7 +315,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 9. FINAL CTA */}
+      {/* 8. FINAL CTA */}
       <section className="relative overflow-hidden bg-primary py-24 text-primary-foreground lg:py-32">
         <div className="grid-bg pointer-events-none absolute inset-0 opacity-[0.04]" />
         <div className="container-page relative">

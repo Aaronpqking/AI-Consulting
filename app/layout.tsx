@@ -31,22 +31,22 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: pageTitle(),
-    template: `%s | ${siteIdentity.companyName}`,
+    template: `%s | ${siteIdentity.brandName}`,
   },
   description: siteDescription,
-  authors: [{ name: siteIdentity.companyName }],
-  creator: siteIdentity.companyName,
+  authors: [{ name: siteIdentity.brandName }],
+  creator: siteIdentity.brandName,
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: siteIdentity.companyName,
+    siteName: siteIdentity.brandName,
     title: pageTitle(),
     description: siteDescription,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteIdentity.companyName} | AI Systems Engineering`,
+    title: `${siteIdentity.brandName} · ${siteIdentity.discipline}`,
     description: siteDescription,
   },
   robots: {
@@ -72,12 +72,13 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: siteIdentity.companyName,
+    name: siteIdentity.brandName,
     description: siteDescription,
     url: siteUrl,
     areaServed: 'Worldwide (remote)',
     knowsAbout: [
       'AI Systems Engineering',
+      'Forward Deployment',
       'Data Infrastructure',
       'Automation',
       'Systems Integration',

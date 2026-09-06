@@ -10,17 +10,20 @@ export function Footer() {
           <div className="md:col-span-5">
             <Link href="/" className="flex items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-accent">
-                <span className="font-serif text-sm font-bold text-accent-foreground">A</span>
+                <span className="font-serif text-sm font-bold text-accent-foreground">FD</span>
               </span>
               <span className="font-serif text-[17px] font-semibold tracking-tight">
-                {siteIdentity.companyName}
+                Forward Deployment
               </span>
             </Link>
+            <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/40">
+              {siteIdentity.discipline}
+            </p>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-primary-foreground/60">
               {siteIdentity.footerLine}
             </p>
-            <p className="mt-3 text-sm text-primary-foreground/40">
-              {siteIdentity.location}
+            <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-foreground/40">
+              {siteIdentity.tagline}
             </p>
           </div>
 
@@ -45,7 +48,7 @@ export function Footer() {
 
           <div className="md:col-span-3">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/40">
-              Connect
+              Contact
             </h3>
             <ul className="mt-5 space-y-3">
               <li>
@@ -84,7 +87,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-primary-foreground/10 pt-6 sm:flex-row sm:items-center">
           <p className="text-xs text-primary-foreground/40">
-            © {new Date().getFullYear()} {siteIdentity.companyName}. All rights reserved.
+            © {new Date().getFullYear()} {siteIdentity.legalName}. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link href="/privacy" className="text-xs text-primary-foreground/40 hover:text-accent">

@@ -3,30 +3,30 @@
 // To change the firm identity, update this object only.
 
 export const siteIdentity = {
-  companyName: 'Aaron King',
-  shortName: 'Aaron King',
+  brandName: 'Forward Deployment',
+  discipline: 'AI Systems Engineering',
+  descriptor: 'Forward Deployment · AI Systems Engineering',
   legalName: 'Aaron King',
-  tagline: 'AI Systems Engineering',
+  tagline: 'AI · Data · Automation · Integration',
   positioning: 'Built to work beyond the demo.',
   description:
-    'AI systems engineering for organizations that need to connect business data, workflows, knowledge and software into reliable, governed operating infrastructure.',
+    'We architect and build the AI, data, automation and integration infrastructure that connects business information to reliable, governed action.',
   contactEmail: 'aaronpqking@gmail.com',
   location: 'South Florida · Remote',
   linkedin: 'https://linkedin.com/in/aaronpqking',
   github: 'https://github.com/Aaronpqking',
   footerLine:
-    'AI systems engineering, data infrastructure, automation and integration.',
+    'AI infrastructure for complex business operations.',
   siteUrl:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://aaronking.dev',
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://forwarddeployment.ai',
 };
 
-// Backward-compatible alias — all existing imports use `site`
-export const site = siteIdentity;
-
 // ─── Metadata Helper ────────────────────────────────────────────
-// Centralized page-title pattern: [Page Name] | [Company Name]
+// Centralized page-title pattern: [Page Name] | Forward Deployment
 export function pageTitle(page?: string): string {
-  return page ? `${page} | ${siteIdentity.companyName}` : `${siteIdentity.companyName} | AI Systems Engineering, Automation & Data Infrastructure`;
+  return page
+    ? `${page} | ${siteIdentity.brandName}`
+    : `${siteIdentity.brandName} · ${siteIdentity.discipline}`;
 }
 
 export const siteDescription = siteIdentity.description;
@@ -35,19 +35,18 @@ export const siteDescription = siteIdentity.description;
 export const nav = [
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
-  { label: 'Demonstrations', href: '/demonstrations' },
   { label: 'Firm', href: '/firm' },
   { label: 'Contact', href: '/contact' },
 ];
 
 // ─── Homepage ────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: 'AI SYSTEMS ENGINEERING · DATA · AUTOMATION · INTEGRATION',
+  eyebrow: 'FORWARD DEPLOYMENT · AI SYSTEMS ENGINEERING',
   headline: 'AI infrastructure for complex business operations.',
   subheadline:
     'We architect and build the AI, data, automation and integration infrastructure that connects business information to reliable, governed action.',
   supporting: 'Built to work beyond the demo.',
-  primaryCta: { label: 'Discuss a System', href: '/contact' },
+  primaryCta: { label: 'Start a Conversation', href: '/contact' },
   secondaryCta: { label: 'View Our Work', href: '/work' },
 };
 
@@ -59,6 +58,21 @@ export const authorityBand = {
     'AI & DATA INFRASTRUCTURE',
     'ENTERPRISE INTEGRATION',
     'PRODUCTION RELIABILITY',
+  ],
+};
+
+export const forwardDeployment = {
+  eyebrow: 'FORWARD DEPLOYMENT',
+  heading: 'Systems built inside the operating reality of the business.',
+  copy: 'We work directly inside real operating environments — mapping the problem, engineering the system, integrating it with existing infrastructure, and carrying it through production readiness.',
+  stages: [
+    { name: 'Understand', desc: 'Define the business objective, operating process, constraints and judgment requirements.' },
+    { name: 'Map', desc: 'Identify information sources, systems of record, actors, decisions, integrations and failure boundaries.' },
+    { name: 'Architect', desc: 'Define deterministic logic, AI reasoning, data flows, approval boundaries and system ownership.' },
+    { name: 'Build', desc: 'Implement the smallest useful version and connect it to the real operating environment.' },
+    { name: 'Integrate', desc: 'Connect the system to existing infrastructure, APIs, workflows and systems of record.' },
+    { name: 'Evaluate', desc: 'Measure system behavior, observe failures, test assumptions and verify outputs against explicit criteria.' },
+    { name: 'Operationalize', desc: 'Add monitoring, retries, documentation, release controls and continuous improvement.' },
   ],
 };
 
@@ -384,7 +398,7 @@ export const finalCta = {
   eyebrow: 'START A CONVERSATION',
   headline: 'Have a business process that should work differently?',
   copy: 'Bring the objective, the process and the constraints. We can determine what should be automated, where AI belongs, what should remain deterministic, and what architecture is required to operate it reliably.',
-  primary: { label: 'Discuss a System', href: '/contact' },
+  primary: { label: 'Start a Conversation', href: '/contact' },
   secondary: { label: 'Send a Project Brief', href: '/contact' },
 };
 
@@ -392,51 +406,20 @@ export const finalCta = {
 export const firm = {
   whoWeAre: {
     heading: 'Who We Are',
-    copy: 'We are an AI systems engineering and technology consulting practice. The work spans architecture, implementation, evaluation and operational readiness for organizations building AI capabilities into real business systems.',
+    copy: 'We are a forward-deployed AI systems engineering practice. We work with organizations to design, build, integrate and operationalize AI, data, automation and software systems inside real business environments. Our work spans architecture through implementation, evaluation and production readiness, with particular emphasis on systems where reliability, integration and operational context matter as much as model capability.',
   },
-  integratedApproach: {
-    heading: 'Integrated Approach',
-    copy: 'Operating infrastructure emerges at the intersection of three disciplines. None of them alone produces a system that works in production.',
-    pillars: [
-      { name: 'BUSINESS PROCESS', desc: 'Objectives, workflows, decisions, judgment and constraints.' },
-      { name: 'SYSTEMS ENGINEERING', desc: 'Architecture, integration, state, reliability and observability.' },
-      { name: 'AI & DATA', desc: 'Retrieval, reasoning, extraction, evaluation and governance.' },
-    ],
-    result: 'OPERATING INFRASTRUCTURE',
-  },
-  whatWeBelieve: {
+  principles: {
     heading: 'Principles',
     items: [
-      'AI should reason where reasoning adds value. Deterministic systems should execute where correctness is required.',
-      'Architecture and implementation are one continuous engineering problem.',
-      'Reliability, evaluation and operational readiness are first-class concerns—not afterthoughts.',
-      'Human judgment can remain explicitly inside the system where ambiguity, authority or risk requires it.',
-      'Systems should be observable, testable and improvable after deployment.',
-    ],
-  },
-  howWeWork: {
-    heading: 'How We Work',
-    items: [
-      'Start with the business objective, not the technology.',
-      'Map the full system before architecting any part of it.',
-      'Build the smallest useful version connected to the real environment.',
-      'Evaluate against explicit criteria before expanding scope.',
-      'Operationalize with monitoring, documentation and ownership.',
-    ],
-  },
-  leadership: {
-    heading: 'Leadership',
-    profiles: [
-      {
-        name: 'Aaron King',
-        role: 'AI Systems Architect & Delivery Consultant',
-        copy: 'AI systems and delivery professional combining hands-on applied AI engineering with more than 15 years of leadership, operations, implementation and stakeholder delivery. Experience spans applied AI architecture, RAG and retrieval systems, evaluation and governance, complex operational environments, production support and cross-functional delivery.',
-      },
+      { label: 'Direct Accountability', desc: 'Senior technical involvement from problem definition through implementation.' },
+      { label: 'Production Orientation', desc: 'Systems are designed around real users, data, workflows, integrations and failure conditions.' },
+      { label: 'Engineering Discipline', desc: 'Architecture, testing, evaluation, observability and operational readiness are part of the delivery — not afterthoughts.' },
+      { label: 'Business Context', desc: 'Technology decisions are evaluated against the actual operating constraint and desired outcome.' },
     ],
   },
   experience: {
     heading: 'Experience',
-    copy: 'Representative categories of hands-on experience — not client claims.',
+    copy: 'Representative categories of hands-on experience.',
     categories: [
       { name: 'Applied AI', desc: 'LLM integration, retrieval-augmented generation, agent systems, structured extraction and evaluation.' },
       { name: 'Data & Knowledge Systems', desc: 'Document ingestion, hybrid retrieval, metadata architecture, provenance and corpus governance.' },
@@ -459,7 +442,7 @@ export const firm = {
   },
   operatingContexts: {
     heading: 'Where These Systems Apply',
-    copy: 'Representative operating contexts — not claims of specialized industry dominance.',
+    copy: 'Representative operating contexts.',
     contexts: [
       { name: 'Investment & Capital Operations', desc: 'Decision tracking, relationship intelligence, meeting-to-action workflows and research ingestion.' },
       { name: 'Multi-Business Operations', desc: 'Cross-entity coordination, shared services and consolidated operational intelligence.' },
@@ -470,7 +453,13 @@ export const firm = {
   },
   capability: {
     heading: 'Technical Capability',
-    copy: 'The practice operates across the full AI systems stack: model integration, retrieval and data infrastructure, automation and API integration, evaluation and production reliability. See the capabilities section for the full technical surface area.',
+    copy: 'The practice operates across the full AI systems stack: model integration, retrieval and data infrastructure, automation and API integration, evaluation and production reliability.',
+  },
+  principal: {
+    heading: 'Principal',
+    name: 'Aaron King',
+    role: 'AI Systems Architecture & Delivery',
+    copy: 'AI systems and delivery professional combining hands-on applied AI engineering with more than 15 years of leadership, operations, implementation and stakeholder delivery. Experience spans applied AI architecture, RAG and retrieval systems, evaluation and governance, complex operational environments, production support and cross-functional delivery.',
   },
 };
 

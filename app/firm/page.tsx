@@ -6,7 +6,7 @@ import { CapabilityBlock } from '@/components/site/capability-block';
 import { firm, capabilities, siteIdentity, pageTitle, siteDescription } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: pageTitle('The Firm'),
+  title: pageTitle('AI Systems Engineering Firm'),
   description: siteDescription,
   alternates: { canonical: '/firm' },
 };
@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 export default function FirmPage() {
   return (
     <div className="pt-[68px]">
-      {/* THE FIRM */}
+      {/* WHO WE ARE */}
       <section className="section-pad">
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
               <SectionHeading
-                eyebrow="THE FIRM"
+                eyebrow="WHO WE ARE"
                 heading={firm.whoWeAre.heading}
                 intro={firm.whoWeAre.copy}
               />
@@ -29,13 +29,13 @@ export default function FirmPage() {
               <Reveal delay={100}>
                 <div className="rounded-lg border border-border bg-card p-6 sm:p-8">
                   <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    Profile
+                    Practice
                   </div>
                   <div className="mt-3 font-serif text-lg font-semibold">
-                    {siteIdentity.companyName}
+                    {siteIdentity.brandName}
                   </div>
                   <div className="mt-1 text-sm text-muted-foreground">
-                    {siteIdentity.tagline}
+                    {siteIdentity.discipline}
                   </div>
                   <div className="mt-4 border-t border-border pt-4 text-sm text-muted-foreground">
                     {siteIdentity.location}
@@ -47,103 +47,61 @@ export default function FirmPage() {
         </div>
       </section>
 
-      {/* INTEGRATED APPROACH */}
+      {/* PRINCIPLES */}
       <section className="section-pad bg-secondary/40">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="INTEGRATED APPROACH"
-            heading={firm.integratedApproach.heading}
-            intro={firm.integratedApproach.copy}
-          />
-          <Reveal delay={120}>
-            <div className="mt-12 grid gap-6 lg:grid-cols-3">
-              {firm.integratedApproach.pillars.map((pillar, i) => (
+          <SectionHeading eyebrow="PRINCIPLES" heading={firm.principles.heading} />
+          <Reveal delay={100}>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              {firm.principles.items.map((item, i) => (
                 <div
-                  key={pillar.name}
+                  key={item.label}
                   className="rounded-lg border border-border bg-card p-6"
                 >
                   <div className="font-mono text-xs font-semibold text-accent">
                     {String(i + 1).padStart(2, '0')}
                   </div>
                   <h3 className="mt-3 font-serif text-base font-semibold tracking-tight">
-                    {pillar.name}
+                    {item.label}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {pillar.desc}
+                    {item.desc}
                   </p>
                 </div>
               ))}
             </div>
           </Reveal>
-          <Reveal delay={200}>
-            <div className="mt-8 flex items-center justify-center">
-              <div className="flex flex-col items-center gap-3 rounded-lg border border-accent/30 bg-accent/5 px-10 py-6">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
-                  Result
+        </div>
+      </section>
+
+      {/* PRINCIPAL */}
+      <section className="section-pad">
+        <div className="container-page">
+          <SectionHeading eyebrow="PRINCIPAL" heading={firm.principal.heading} />
+          <Reveal delay={100}>
+            <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:gap-12">
+              <div className="lg:col-span-4">
+                <div className="rounded-lg border border-border bg-card p-6">
+                  <div className="font-serif text-lg font-semibold">
+                    {firm.principal.name}
+                  </div>
+                  <div className="mt-1 text-sm text-muted-foreground">
+                    {firm.principal.role}
+                  </div>
                 </div>
-                <div className="font-serif text-xl font-semibold tracking-tight">
-                  {firm.integratedApproach.result}
-                </div>
+              </div>
+              <div className="lg:col-span-8">
+                <p className="text-base leading-relaxed text-muted-foreground">
+                  {firm.principal.copy}
+                </p>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* PRINCIPLES */}
-      <section className="section-pad">
-        <div className="container-page">
-          <SectionHeading eyebrow="PRINCIPLES" heading={firm.whatWeBelieve.heading} />
-          <Reveal delay={100}>
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-              {firm.whatWeBelieve.items.map((item, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 rounded-lg border border-border bg-card p-5 text-sm leading-relaxed text-foreground/90"
-                >
-                  <span className="font-mono mt-0.5 text-xs text-accent">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* LEADERSHIP */}
-      <section className="section-pad bg-secondary/40">
-        <div className="container-page">
-          <SectionHeading eyebrow="LEADERSHIP" heading={firm.leadership.heading} />
-          <div className="mt-10 space-y-8">
-            {firm.leadership.profiles.map((profile) => (
-              <Reveal key={profile.name} delay={100}>
-                <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
-                  <div className="lg:col-span-4">
-                    <div className="rounded-lg border border-border bg-card p-6">
-                      <div className="font-serif text-lg font-semibold">
-                        {profile.name}
-                      </div>
-                      <div className="mt-1 text-sm text-muted-foreground">
-                        {profile.role}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="lg:col-span-8">
-                    <p className="text-base leading-relaxed text-muted-foreground">
-                      {profile.copy}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* EXPERIENCE */}
-      <section className="section-pad">
+      <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <SectionHeading
             eyebrow="EXPERIENCE"
@@ -174,7 +132,7 @@ export default function FirmPage() {
       </section>
 
       {/* ENGAGEMENT MODEL */}
-      <section className="section-pad bg-secondary/40">
+      <section className="section-pad">
         <div className="container-page">
           <SectionHeading
             eyebrow="ENGAGEMENT MODEL"
@@ -201,7 +159,7 @@ export default function FirmPage() {
       </section>
 
       {/* OPERATING CONTEXTS */}
-      <section className="section-pad">
+      <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <SectionHeading
             eyebrow="WHERE THESE SYSTEMS APPLY"
@@ -229,7 +187,7 @@ export default function FirmPage() {
       </section>
 
       {/* CAPABILITY */}
-      <section className="section-pad bg-secondary/40">
+      <section className="section-pad">
         <div className="container-page">
           <SectionHeading
             eyebrow="CAPABILITY"
@@ -250,7 +208,7 @@ export default function FirmPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-pad">
+      <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <Reveal>
             <div className="rounded-lg border border-border bg-card p-8 text-center sm:p-12">
@@ -263,7 +221,7 @@ export default function FirmPage() {
                 is required.
               </p>
               <div className="mt-6 flex justify-center">
-                <Cta label="Discuss a System" href="/contact" size="lg" />
+                <Cta label="Start a Conversation" href="/contact" size="lg" />
               </div>
             </div>
           </Reveal>

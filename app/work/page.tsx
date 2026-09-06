@@ -7,7 +7,7 @@ import { caseStudies, finalCta } from '@/data/site';
 import { pageTitle, siteDescription } from '@/data/site';
 
 export const metadata: Metadata = {
-  title: pageTitle('Selected Systems Engineering Work'),
+  title: pageTitle('Selected Work'),
   description: siteDescription,
   alternates: { canonical: '/work' },
 };
@@ -20,11 +20,11 @@ export default function WorkPage() {
           <SectionHeading
             eyebrow="SELECTED WORK"
             heading="Selected systems work"
-            intro="Each case is structured around the problem, constraints, system, method, decision and result."
+            intro="Each case is structured around the problem, constraints, system, engineering, outcome and evidence."
           />
           <Reveal>
             <p className="mt-4 max-w-2xl text-xs uppercase tracking-[0.14em] text-muted-foreground/70">
-              Selected engagements are anonymized to protect client and proprietary information.
+              Selected engagements are summarized at a high level to protect client and internal information. Results are stated only where they can be substantiated.
             </p>
           </Reveal>
 

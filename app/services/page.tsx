@@ -20,9 +20,9 @@ export default function ServicesPage() {
       <section className="section-pad">
         <div className="container-page">
           <SectionHeading
-            eyebrow="SERVICES"
+            eyebrow="HOW WE ENGAGE"
             heading="What we build"
-            intro="Four core capabilities that connect information, intelligence, decisions and action across business systems."
+            intro="Forward deployment can begin at architecture, implementation, system rescue or production optimization depending on the state of the operating environment."
           />
 
           <div className="mt-16 space-y-20">
@@ -112,7 +112,7 @@ export default function ServicesPage() {
                 be automated, where AI belongs, and what architecture is required.
               </p>
               <div className="mt-6 flex justify-center">
-                <Cta label="Discuss a System" href="/contact" size="lg" />
+                <Cta label="Start a Conversation" href="/contact" size="lg" />
               </div>
             </div>
           </Reveal>

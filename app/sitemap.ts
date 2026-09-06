@@ -3,7 +3,7 @@ import { siteIdentity } from '@/data/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteIdentity.siteUrl;
-  const pages = ['', '/services', '/work', '/firm', '/contact', '/demonstrations'];
+  const pages = ['', '/services', '/work', '/firm', '/contact'];
 
   return pages.map((path) => ({
     url: `${base}${path}`,

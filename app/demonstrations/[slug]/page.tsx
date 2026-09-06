@@ -252,7 +252,7 @@ export default function MeetingIntelligenceDemoPage({
           <Reveal delay={160}>
             <div className="mt-8 flex justify-center">
               <Cta
-                label="Discuss a System"
+                label="Start a Conversation"
                 href="/contact"
                 variant="secondary"
                 size="lg"

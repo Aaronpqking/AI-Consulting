@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { nav, siteIdentity } from '@/data/site';
+import { nav } from '@/data/site';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -43,13 +43,13 @@ export function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-3"
-          aria-label={`${siteIdentity.companyName} — home`}
+          aria-label="Forward Deployment — home"
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-primary">
-            <span className="font-serif text-sm font-bold text-primary-foreground">A</span>
+            <span className="font-serif text-sm font-bold text-primary-foreground">FD</span>
           </span>
           <span className="font-serif text-[17px] font-semibold tracking-tight text-foreground">
-            {siteIdentity.companyName}
+            Forward Deployment
           </span>
         </Link>
 
@@ -84,7 +84,7 @@ export function Navbar() {
             href="/contact"
             className="group inline-flex h-10 items-center gap-1.5 rounded-sm bg-primary px-5 text-[13px] font-medium text-primary-foreground transition-all hover:bg-primary/90"
           >
-            Discuss a System
+            Start a Conversation
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
         </div>
@@ -139,7 +139,7 @@ export function Navbar() {
               href="/contact"
               className="mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-primary px-5 text-[15px] font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Discuss a System
+              Start a Conversation
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
