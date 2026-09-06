@@ -94,15 +94,15 @@ export default function WorkPage() {
           <Reveal delay={160}>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Cta
-                label={finalCta.primary.label}
-                href={finalCta.primary.href}
+                label="Start a Conversation"
+                href="/contact?source=work"
                 variant="secondary"
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 border-0"
               />
               <Cta
-                label={finalCta.secondary.label}
-                href={finalCta.secondary.href}
+                label="View Our Work"
+                href="/work"
                 variant="ghost"
                 size="lg"
                 className="text-primary-foreground hover:text-accent"

@@ -335,7 +335,7 @@ export default function IndustrialKnowledgeSystemPage() {
         <div className="container-page relative text-center">
           <Reveal>
             <h2 className="text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-              Have a knowledge or retrieval problem?
+              Working through a similar systems problem?
             </h2>
           </Reveal>
           <Reveal delay={120}>
@@ -346,10 +346,10 @@ export default function IndustrialKnowledgeSystemPage() {
           <Reveal delay={240}>
             <div className="mt-9 flex justify-center">
               <Link
-                href="/contact"
+                href="/contact?source=industrial-knowledge"
                 className="group inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent px-8 text-base font-medium text-accent-foreground transition-all hover:bg-accent/90"
               >
-                Discuss a Knowledge System
+                Start a Conversation
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
             </div>

@@ -253,7 +253,7 @@ export default function MeetingIntelligenceDemoPage({
             <div className="mt-8 flex justify-center">
               <Cta
                 label="Start a Conversation"
-                href="/contact"
+                href="/contact?source=demonstration"
                 variant="secondary"
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 border-0"

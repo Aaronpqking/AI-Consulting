@@ -65,7 +65,7 @@ export default function AIOperatingSystemsPage() {
           <Reveal delay={240}>
             <div className="mt-10">
               <Link
-                href="/contact"
+                href="/contact?source=ai-operating-systems"
                 className="group inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent px-7 text-base font-medium text-accent-foreground transition-all hover:bg-accent/90"
               >
                 Discuss an Operating System
@@ -297,7 +297,7 @@ export default function AIOperatingSystemsPage() {
           <Reveal delay={240}>
             <div className="mt-9 flex justify-center">
               <Link
-                href="/contact"
+                href="/contact?source=ai-operating-systems"
                 className="group inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent px-8 text-base font-medium text-accent-foreground transition-all hover:bg-accent/90"
               >
                 Discuss an Operating System

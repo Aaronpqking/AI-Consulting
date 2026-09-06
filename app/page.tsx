@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Cta } from '@/components/site/cta';
 import { Reveal } from '@/components/site/reveal';
 import { SectionHeading } from '@/components/site/section-heading';
 import { HeroVisual } from '@/components/site/hero-visual';
@@ -18,7 +17,6 @@ import {
   systemsModel,
   outcomes,
   caseStudies,
-  methodology,
   capabilities,
   finalCta,
   pageTitle,
@@ -110,8 +108,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FORWARD DEPLOYMENT */}
+      {/* SELECTED WORK */}
       <section className="section-pad">
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="SELECTED WORK"
+            heading="Selected systems work"
+            intro="Each engagement is structured around the problem, constraints, system, engineering, outcome and evidence."
+          />
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {caseStudies.slice(0, 3).map((study, i) => (
+              <CaseCard key={study.id} study={study} index={i} />
+            ))}
+          </div>
+          <Reveal delay={200}>
+            <div className="mt-10 flex items-center gap-4">
+              <Link
+                href="/work"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-accent"
+              >
+                View More Work
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* WE ARE FORWARD DEPLOYMENT */}
+      <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <div className="mx-auto max-w-4xl">
             <Reveal>
@@ -143,40 +168,33 @@ export default function Home() {
                 ))}
               </div>
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 1. FROM BUSINESS PROCESS TO WORKING SYSTEM */}
-      <section className="section-pad">
-        <div className="container-page">
-          <div className="mx-auto max-w-4xl">
-            <Reveal>
-              <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                {firmPositioning.eyebrow}
+            <Reveal delay={320}>
+              <div className="mt-10 border-t border-border pt-6">
+                <p className="text-sm text-muted-foreground">
+                  {firmPositioning.heading} {firmPositioning.copy}
+                </p>
               </div>
             </Reveal>
-            <Reveal delay={80}>
-              <h2 className="text-balance font-serif text-3xl font-semibold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-                {firmPositioning.heading}
-              </h2>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-                {firmPositioning.copy}
-              </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                {firmPositioning.copy2}
-              </p>
+            <Reveal delay={400}>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <Link
+                  href="/contact?source=forward-deployment"
+                  className="group inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-primary px-6 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90"
+                >
+                  Start a Conversation
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+                <span className="text-sm text-muted-foreground">
+                  {forwardDeployment.ctaLine}
+                </span>
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* 2. SERVICES */}
-      <section className="section-pad bg-secondary/40">
+      {/* CAPABILITIES */}
+      <section className="section-pad">
         <div className="container-page">
           <SectionHeading
             eyebrow="CAPABILITIES"
@@ -188,11 +206,22 @@ export default function Home() {
               <ServiceCard key={s.id} service={s} index={i} className="border-0" />
             ))}
           </div>
+          <Reveal delay={200}>
+            <div className="mt-8">
+              <Link
+                href="/services"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-accent"
+              >
+                Explore Services
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* 3. SYSTEMS MODEL */}
-      <section className="section-pad">
+      {/* SYSTEMS MODEL */}
+      <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <SectionHeading
             eyebrow={systemsModel.eyebrow}
@@ -210,8 +239,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. BUSINESS OUTCOMES */}
-      <section className="section-pad bg-secondary/40">
+      {/* OUTCOMES */}
+      <section className="section-pad">
         <div className="container-page">
           <SectionHeading
             eyebrow="OUTCOMES"
@@ -237,64 +266,21 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* 5. SELECTED WORK */}
-      <section className="section-pad">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="SELECTED WORK"
-            heading="Selected systems work"
-            intro="Each engagement is structured around the problem, constraints, system, engineering, outcome and evidence."
-          />
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {caseStudies.slice(0, 3).map((study, i) => (
-              <CaseCard key={study.id} study={study} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. HOW WE WORK */}
-      <section className="section-pad">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow={methodology.eyebrow}
-            heading={methodology.heading}
-          />
-          <div className="mt-16">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {methodology.stages.map((stage, i) => (
-                <Reveal
-                  key={stage.num}
-                  delay={i * 60}
-                  className="group relative rounded-lg border border-border bg-card p-7 transition-colors duration-200 hover:border-accent/30"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono flex h-9 w-9 items-center justify-center rounded-full border border-border text-xs font-semibold text-accent transition-colors group-hover:border-accent">
-                      {stage.num}
-                    </span>
-                    <h3 className="font-serif text-base font-semibold tracking-tight">
-                      {stage.name}
-                    </h3>
-                  </div>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {stage.desc}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
           <Reveal delay={200}>
-            <p className="mx-auto mt-14 max-w-2xl border-l-2 border-accent pl-5 font-serif text-lg font-medium leading-relaxed text-foreground">
-              {methodology.closing}
-            </p>
+            <div className="mt-8">
+              <Link
+                href="/work"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-accent"
+              >
+                View Our Work
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 7. TECHNICAL CAPABILITY */}
+      {/* TECHNICAL SURFACE AREA */}
       <section className="section-pad bg-secondary/40">
         <div className="container-page">
           <SectionHeading
@@ -312,10 +298,21 @@ export default function Home() {
               />
             ))}
           </div>
+          <Reveal delay={200}>
+            <div className="mt-8">
+              <Link
+                href="/contact?source=technical-surface"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-accent"
+              >
+                Discuss a System
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* 8. FINAL CTA */}
+      {/* FINAL CTA */}
       <section className="relative overflow-hidden bg-primary py-24 text-primary-foreground lg:py-32">
         <div className="grid-bg pointer-events-none absolute inset-0 opacity-[0.04]" />
         <div className="container-page relative">
@@ -331,13 +328,19 @@ export default function Home() {
               </p>
             </Reveal>
             <Reveal delay={240}>
-              <div className="mt-10 flex justify-center">
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href={finalCta.primary.href}
                   className="group inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-accent px-8 text-base font-medium text-accent-foreground transition-all hover:bg-accent/90"
                 >
                   {finalCta.primary.label}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  href={finalCta.secondary.href}
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-primary-foreground/20 px-7 text-base font-medium text-primary-foreground/80 transition-colors hover:border-primary-foreground/40 hover:text-primary-foreground"
+                >
+                  {finalCta.secondary.label}
                 </Link>
               </div>
             </Reveal>

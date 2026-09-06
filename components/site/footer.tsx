@@ -52,6 +52,14 @@ export function Footer() {
             </h3>
             <ul className="mt-5 space-y-3">
               <li>
+                <Link
+                  href="/contact?source=footer"
+                  className="text-sm text-primary-foreground/70 transition-colors hover:text-accent"
+                >
+                  Start a Conversation
+                </Link>
+              </li>
+              <li>
                 <a
                   href={`mailto:${siteIdentity.contactEmail}`}
                   className="text-sm text-primary-foreground/70 transition-colors hover:text-accent"

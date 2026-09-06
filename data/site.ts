@@ -46,7 +46,7 @@ export const hero = {
   subheadline:
     'We architect and build the AI, data, automation and integration infrastructure that connects business information to reliable, governed action.',
   supporting: 'Built to work beyond the demo.',
-  primaryCta: { label: 'Start a Conversation', href: '/contact' },
+  primaryCta: { label: 'Start a Conversation', href: '/contact?source=hero' },
   secondaryCta: { label: 'View Our Work', href: '/work' },
 };
 
@@ -62,9 +62,10 @@ export const authorityBand = {
 };
 
 export const forwardDeployment = {
-  eyebrow: 'FORWARD DEPLOYMENT',
-  heading: 'Systems built inside the operating reality of the business.',
-  copy: 'We work directly inside real operating environments — mapping the problem, engineering the system, integrating it with existing infrastructure, and carrying it through production readiness.',
+  eyebrow: 'WE ARE FORWARD DEPLOYMENT',
+  heading: 'We work inside the operating reality of the business.',
+  copy: 'We do not stop at recommendations or prototypes. We work directly with the systems, information, constraints and workflows that run the business — designing, building, integrating and evaluating the system through production readiness.',
+  ctaLine: 'Have an operating process or system that should work differently?',
   stages: [
     { name: 'Understand', desc: 'Define the business objective, operating process, constraints and judgment requirements.' },
     { name: 'Map', desc: 'Identify information sources, systems of record, actors, decisions, integrations and failure boundaries.' },
@@ -78,11 +79,10 @@ export const forwardDeployment = {
 
 export const firmPositioning = {
   eyebrow: 'FROM BUSINESS PROCESS TO WORKING SYSTEM',
-  heading: 'Intelligence is useful when it changes how the business operates.',
-  copy: 'Organizations increasingly have AI tools, data, SaaS platforms and automation available to them. The harder problem is connecting those capabilities into coherent operating infrastructure.',
-  copy2:
-    'We translate business objectives and processes into systems that ingest information, structure it, apply deterministic and model-based reasoning where appropriate, route judgment to people, execute against systems of record, and remain observable after deployment.',
-  supporting: 'Architecture and implementation are treated as one continuous engineering problem.',
+  heading: 'AI tools are not usually the hard part.',
+  copy: 'The hard part is connecting information, business process, systems of record, human judgment, automation and reliable execution into one coherent system.',
+  copy2: '',
+  supporting: '',
 };
 
 // ─── Services ────────────────────────────────────────────────────
@@ -357,22 +357,6 @@ export const caseStudies = [
   },
 ];
 
-// ─── Methodology ─────────────────────────────────────────────────
-export const methodology = {
-  eyebrow: 'HOW WE WORK',
-  heading: 'From objective to operating system.',
-  closing:
-    'Architecture and implementation are treated as one continuous engineering problem.',
-  stages: [
-    { num: '01', name: 'Understand', desc: 'Define the business objective, operating process, constraints and judgment requirements.' },
-    { num: '02', name: 'Map', desc: 'Identify information sources, systems of record, actors, decisions, integrations and failure boundaries.' },
-    { num: '03', name: 'Architect', desc: 'Define deterministic logic, AI reasoning, data flows, approval boundaries, security and system ownership.' },
-    { num: '04', name: 'Build', desc: 'Implement the smallest useful version and connect it to the real operating environment.' },
-    { num: '05', name: 'Evaluate', desc: 'Measure system behavior, observe failures, test assumptions and verify outputs against explicit criteria.' },
-    { num: '06', name: 'Operationalize', desc: 'Add monitoring, retries, documentation, release controls, ownership and continuous improvement.' },
-  ],
-};
-
 // ─── Capabilities ────────────────────────────────────────────────
 export const capabilities = [
   {
@@ -396,10 +380,10 @@ export const capabilities = [
 // ─── Final CTA ───────────────────────────────────────────────────
 export const finalCta = {
   eyebrow: 'START A CONVERSATION',
-  headline: 'Have a business process that should work differently?',
+  headline: 'Have a business process or system that should work differently?',
   copy: 'Bring the objective, the process and the constraints. We can determine what should be automated, where AI belongs, what should remain deterministic, and what architecture is required to operate it reliably.',
-  primary: { label: 'Start a Conversation', href: '/contact' },
-  secondary: { label: 'Send a Project Brief', href: '/contact' },
+  primary: { label: 'Start a Conversation', href: '/contact?source=final-cta' },
+  secondary: { label: 'View Our Work', href: '/work' },
 };
 
 // ─── Firm Page ───────────────────────────────────────────────────

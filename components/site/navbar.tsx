@@ -81,7 +81,7 @@ export function Navbar() {
 
         <div className="hidden lg:block">
           <Link
-            href="/contact"
+            href="/contact?source=nav"
             className="group inline-flex h-10 items-center gap-1.5 rounded-sm bg-primary px-5 text-[13px] font-medium text-primary-foreground transition-all hover:bg-primary/90"
           >
             Start a Conversation
@@ -136,7 +136,7 @@ export function Navbar() {
               );
             })}
             <Link
-              href="/contact"
+              href="/contact?source=nav"
               className="mt-5 inline-flex h-12 items-center justify-center gap-2 rounded-sm bg-primary px-5 text-[15px] font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               Start a Conversation

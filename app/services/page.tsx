@@ -112,7 +112,7 @@ export default function ServicesPage() {
                 be automated, where AI belongs, and what architecture is required.
               </p>
               <div className="mt-6 flex justify-center">
-                <Cta label="Start a Conversation" href="/contact" size="lg" />
+                <Cta label="Start a Conversation" href="/contact?source=services" size="lg" />
               </div>
             </div>
           </Reveal>
